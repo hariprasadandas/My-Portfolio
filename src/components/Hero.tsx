@@ -77,7 +77,7 @@ const Hero = () => {
             <div className="relative">
               <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-glow-lg animate-float">
                 <img 
-                  src="/src/assets/Hariprasad-profile.png" 
+                  src="/uploads/Hariprasad-profile.png" 
                   alt="Hariprasad Andas - Full Stack Developer" 
                   className="w-full h-full object-cover"
                 />
