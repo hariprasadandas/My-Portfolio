@@ -79,7 +79,7 @@ const Portfolio = () => {
       ],
       category: "E-commerce",
       status: "Completed",
-      year: "2024"
+      year: "2025"
     }
   ];
 

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,32 +8,34 @@ import { toast } from '@/hooks/use-toast';
 import { Github, Linkedin } from 'lucide-react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    if (!formRef.current) return;
+
+    emailjs.sendForm(
+      'service_dymuo4p',
+      'template_olq1wjo',     
+      formRef.current,
+      'FHD4ga6-zd0Fepndk'       
+    ).then(() => {
       toast({
-        title: "Message sent successfully!",
+        title: 'Message sent successfully!',
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      setFormData({ name: '', email: '', message: '' });
+      formRef.current.reset();
+    }).catch(() => {
+      toast({
+        title: 'Message failed!',
+        description: 'Something went wrong. Please try again later.',
+        variant: 'destructive'
+      });
+    }).finally(() => {
       setIsSubmitting(false);
-    }, 1000);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
     });
   };
 
@@ -74,40 +77,36 @@ const Contact = () => {
           <Card className="bg-card-gradient border-border shadow-card-elegant">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6 text-primary">Send Me a Message</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Your Name
                   </label>
                   <Input
                     id="name"
-                    name="name"
+                    name="user_name"
                     type="text"
-                    value={formData.name}
-                    onChange={handleChange}
                     required
                     className="bg-muted border-border focus:border-primary"
                     placeholder="Enter your full name"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     Email Address
                   </label>
                   <Input
                     id="email"
-                    name="email"
+                    name="user_email"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     required
                     className="bg-muted border-border focus:border-primary"
                     placeholder="Enter your email address"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Message
@@ -115,17 +114,15 @@ const Contact = () => {
                   <Textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     required
                     rows={6}
                     className="bg-muted border-border focus:border-primary resize-none"
                     placeholder="Tell me about your project or just say hello..."
                   />
                 </div>
-                
-                <Button 
-                  type="submit" 
+
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3"
                 >
@@ -135,12 +132,12 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-8">
             <Card className="bg-card-gradient border-border shadow-card-elegant">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-primary">Contact Information</h3>
-                
+
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-center space-x-4">
@@ -149,7 +146,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">{info.label}</p>
-                        <a 
+                        <a
                           href={info.href}
                           target={info.href.startsWith('http') ? '_blank' : undefined}
                           rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -168,19 +165,19 @@ const Contact = () => {
             <Card className="bg-card-gradient border-border shadow-card-elegant">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-primary">Follow Me</h3>
-                
+
                 <div className="flex space-x-4">
-                  <a 
-                    href="https://github.com/hariprasadandas" 
-                    target="_blank" 
+                  <a
+                    href="https://github.com/hariprasadandas"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-12 h-12 bg-card border border-border rounded-lg hover:border-primary hover:shadow-glow transition-all duration-300 group"
                   >
                     <Github className="w-6 h-6 text-foreground group-hover:text-primary transition-colors duration-300" />
                   </a>
-                  <a 
-                    href="https://linkedin.com/in/hariprasad-andas-5b4b28296" 
-                    target="_blank" 
+                  <a
+                    href="https://linkedin.com/in/hariprasad-andas-5b4b28296"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-12 h-12 bg-card border border-border rounded-lg hover:border-primary hover:shadow-glow transition-all duration-300 group"
                   >
@@ -199,7 +196,7 @@ const Contact = () => {
                   <span className="text-foreground font-medium">Available for new projects</span>
                 </div>
                 <p className="text-muted-foreground text-sm">
-                  I'm currently open to freelance opportunities and full-time positions. 
+                  I'm currently open to freelance opportunities and full-time positions.
                   Let's discuss how we can work together to bring your ideas to life.
                 </p>
               </CardContent>
