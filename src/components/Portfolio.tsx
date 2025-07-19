@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -24,7 +24,9 @@ const Portfolio = () => {
       ],
       category: "Web Application",
       status: "Completed",
-      year: "2023"
+      year: "2023",
+      deploymentLink: "https://dhanushraghava2004.github.io/MBOOKS/",
+      githubLink: "https://github.com/hariprasadandas/mru-ebooks"
     },
     {
       id: 2,
@@ -42,7 +44,9 @@ const Portfolio = () => {
       ],
       category: "Education Management",
       status: "Completed",
-      year: "2024"
+      year: "2024",
+      deploymentLink: "https://student-portal.example.com",
+      githubLink: "https://github.com/username/student-learning-portal"
     },
     {
       id: 3,
@@ -60,7 +64,9 @@ const Portfolio = () => {
       ],
       category: "Social Platform",
       status: "Completed",
-      year: "2025"
+      year: "2025",
+      deploymentLink: "https://devconnect.example.com",
+      githubLink: "https://github.com/username/devconnect"
     },
     {
       id: 4,
@@ -79,7 +85,9 @@ const Portfolio = () => {
       ],
       category: "E-commerce",
       status: "Completed",
-      year: "2025"
+      year: "2025",
+      deploymentLink: "https://taaza-latest.vercel.app/",
+      githubLink: "https://github.com/hariprasadandas/Taaza-5-main"
     }
   ];
 
@@ -190,14 +198,30 @@ const Portfolio = () => {
                       </div>
                     </DialogContent>
                   </Dialog>
-                  
-                  <Button 
-                    variant="outline"
-                    size="icon"
-                    className="border-border hover:border-primary hover:bg-primary/10"
-                  >
-                    <Github className="w-4 h-4" />
-                  </Button>
+                  {project.deploymentLink && (
+                    <a
+                      href={project.deploymentLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex border border-border rounded-md p-2 mr-2 hover:border-primary hover:bg-primary/10"
+                      aria-label="Live Demo"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="ml-1">Link</span>
+                    </a>
+                  )}
+                  {project.githubLink && (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex border border-border rounded-md p-2 hover:border-primary hover:bg-primary/10"
+                      aria-label="GitHub Repository"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span className="ml-1">Git hub</span>
+                    </a>
+                  )}
                 </div>
               </CardContent>
             </Card>
