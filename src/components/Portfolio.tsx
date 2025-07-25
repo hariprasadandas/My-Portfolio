@@ -65,8 +65,8 @@ const Portfolio = () => {
       category: "Social Platform",
       status: "Completed",
       year: "2025",
-      deploymentLink: "https://devconnect.example.com",
-      githubLink: "https://github.com/username/devconnect"
+      deploymentLink: "https://devconnect-six-peach.vercel.app/",
+      githubLink: "https://github.com/hariprasadandas/Devconnect"
     },
     {
       id: 4,
