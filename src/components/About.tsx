@@ -5,7 +5,7 @@ const About = () => {
     degree: "Bachelor of Technology",
     institution: "Malla Reddy University",
     graduation: "June 2025",
-    field: "Computer Science with focus on AI & ML"
+    field: "Computer Science and Engineering specializing in AI & ML"
   };
 
   const experience = [
@@ -40,7 +40,7 @@ const About = () => {
               <h3 className="text-2xl font-bold mb-4">About Me</h3>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 I'm a passionate Full-Stack Web Developer from a Computer Science background 
-                focused on AI & ML, recently graduated from Malla Reddy University (June 2025). 
+                specializing in AI & ML, recently graduated from Malla Reddy University (June 2025). 
                 I specialize in creating digital experiences that combine elegant design with 
                 powerful functionality.
               </p>
